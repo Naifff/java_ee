@@ -1,4 +1,4 @@
-package ru.volnenko.enterprise.servlet;
+package ru.geekbrains.enterprise.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package ru.volnenko.enterprise.filter;
+package ru.geekbrains.enterprise.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

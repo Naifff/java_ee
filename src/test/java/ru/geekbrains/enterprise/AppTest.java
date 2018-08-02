@@ -1,4 +1,4 @@
-package ru.volnenko.enterprise;
+package ru.geekbrains.enterprise;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
