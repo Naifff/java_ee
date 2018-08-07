@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+width: 1000px;
+margin: 0 auto;
+}
+
+.test{
+color:red;
+}
+
+.catalog{
+display:flex;
+flex-flow: row wrap;
+}
+
+.menu li{
+display: inline;
+border : 0px solid red;
+}
+
+.menu a:hover{
+color:red;
+}
+
+.menu a{
+text-decoration: none;
+font-size : 18px ;
+font-family : Verdana;
+font-weight : bold;
+color:black;
+}

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-
 @WebServlet(name = Main.NAME, urlPatterns = {"/Main"})
 public class Main extends HttpServlet {
 
@@ -17,29 +16,8 @@ public class Main extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute("123", new Date());
-        req.getSession().getAttribute("123");
-
-        try (PrintWriter writer = resp.getWriter()) {
-            writer.println("<html><head>\n" +
-                    "    <meta charset=\"UTF-8\">\n" +
-                    "    <meta name=\"viewport\"\n" +
-                    "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
-                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
-                    "    <title>I AM Main SERVLET!</title>\n" +
-                    "    <link rel=\"stylesheet\" href=\"style.css\">\n" +
-                    "</head>\n<body>" +
-                    "<body>" +
-                    " <ul>" +
-                    "<li><a href=\"/example/Cart\">Cart</a></li>" +
-                    " <li><a href=\"/example/Catalog\">Catalog</a></li>" +
-                    " <li><a href=\"/example/Main\">Main</a></li>" +
-                    " <li><a href=\"/example/Order\">Order</a></li>" +
-                    " <li><a href=\"/example/Product\">Product</a></li>" +
-                    " </ul>" +
-                    "</body>" +
-                    "</html>");
-        }
+        req.getRequestDispatcher("main.jsp").forward(req, resp);
     }
+
 
 }
