@@ -5,14 +5,124 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:component="http://java.sun.com/jsf/composite/component">
 <h:head>
-
+    <h:outputStylesheet library="css" name="main.css"  />
 </h:head>
+<f:metadata>
+    <f:viewParam name="merchId" value="#{adminkaController.merchId}" />
+    <f:viewParam name="orderId" value="#{adminkaController.orderId}" />
+    <f:viewParam name="categoryId" value="#{adminkaController.categoryId}" />
+    <f:viewAction action="#{adminkaController.init}" />
+</f:metadata>
 <h:body>
-    <h:outputLabel value="Hello, world"/>
-    <p:button value="TEST" outcome="task-list">
-    </p:button>
-</h:body>
+    <component:mainMenu />
+    <h:form>
+        <p:fieldset legend="EDIT MERCH">
+            <p:spacer height="5" />
+            <p:outputPanel>
+                <p:outputLabel value="NAME" />
+            </p:outputPanel>
+            <p:messages id="msg" />
+            <p:outputPanel>
+                <p:inputText value="#{adminkaController.merch.name}" id="name"
+                             required="true" requiredMessage="ENTER NAME" >
+                    <p:ajax update="msg" event="keyup" />
+                </p:inputText>
+            </p:outputPanel>
+            <p:spacer height="5" />
+        </p:fieldset>
+        <p:spacer height="20" />
+        <p:outputPanel>
+            <p:commandButton update="msg" value="SAVE" action="#{adminkaController.save}" />
+            <p:spacer width="20" />
+            <p:button value="MERCHs" outcome="adminka">
+                <f:param name="merchId" value="#{adminkaController.merchId}" />
+            </p:button>
+        </p:outputPanel>
+    </h:form>
 
+
+
+
+    <h:form>
+        <p:dataTable id="mainTable" value="#{adminkaController.listMerchCategory}" var="merch"  rowIndexVar="indexVar">
+            <f:facet name="header">
+                <p:outputPanel style="margin: 5px;">
+                    <p:outputLabel value="MERCH" />
+                </p:outputPanel>
+            </f:facet>
+            <p:column headerText="№" width="50" style="text-align: center;">
+                <p:outputLabel value="#{indexVar +1}." />
+            </p:column>
+            <p:column headerText="CATEGORY" width="200">
+                <p:outputLabel value="#{merch.category.name}" />
+            </p:column>
+            <p:column headerText="NAME" width="200">
+                <p:outputLabel value="#{merch.name}" />
+            </p:column>
+            <p:column headerText="DESCRIPTION" style="width: 100%;">
+                <p:outputLabel value="#{merch.description}" />
+            </p:column>
+            <p:column width="30" style="text-align: center;">
+                <p:link outcome="adminka">
+                    <i class="fa fa-edit" style="font-size: 1.5em; margin: 5px;" />
+                    <f:param name="id" value="#{merch.id}" />
+                </p:link>
+            </p:column>
+            <p:column width="30" style="text-align: center;">
+                <p:commandLink update="mainTable" actionListener="#{adminkaController.removeMerchById(merch.id)}">
+                    <i class="fa fa-trash" style="font-size: 1.5em; margin: 5px;" />
+                </p:commandLink>
+            </p:column>
+        </p:dataTable>
+        <p:spacer height="20" />
+        <p:outputPanel>
+            <p:button value="CREATE" outcome="adminka">
+                <f:param name="categoryId" value="#{adminkaController.categoryId}" />
+            </p:button>
+        </p:outputPanel>
+    </h:form>
+
+    <h:form>
+        <p:dataTable id="orderTable" value="#{adminkaController.listMerchOrder}" var="merch"  rowIndexVar="indexVar">
+            <f:facet name="header">
+                <p:outputPanel style="margin: 5px;">
+                    <p:outputLabel value="MERCH" />
+                </p:outputPanel>
+            </f:facet>
+            <p:column headerText="№" width="50" style="text-align: center;">
+                <p:outputLabel value="#{indexVar +1}." />
+            </p:column>
+            <p:column headerText="ORDER" width="200">
+                <p:outputLabel value="#{merch.order.name}" />
+            </p:column>
+            <p:column headerText="NAME" width="200">
+                <p:outputLabel value="#{merch.name}" />
+            </p:column>
+            <p:column headerText="DESCRIPTION" style="width: 100%;">
+                <p:outputLabel value="#{merch.description}" />
+            </p:column>
+            <p:column width="30" style="text-align: center;">
+                <p:link outcome="adminka">
+                    <i class="fa fa-edit" style="font-size: 1.5em; margin: 5px;" />
+                    <f:param name="id" value="#{merch.id}" />
+                </p:link>
+            </p:column>
+            <p:column width="30" style="text-align: center;">
+                <p:commandLink update="orderTable" actionListener="#{adminkaController.removeMerchById(merch.id)}">
+                    <i class="fa fa-trash" style="font-size: 1.5em; margin: 5px;" />
+                </p:commandLink>
+            </p:column>
+        </p:dataTable>
+        <p:spacer height="20" />
+        <p:outputPanel>
+            <p:button value="CREATE" outcome="adminka">
+                <f:param name="orderId" value="#{adminkaController.orderId}" />
+            </p:button>
+        </p:outputPanel>
+    </h:form>
+
+</h:body>
 </html>
